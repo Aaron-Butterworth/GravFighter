@@ -22,8 +22,8 @@ function enemies.ai(dt)
 				end
 			end
 		elseif v.state == "shoot" then
-			v.target.x = player.x + math.random(-5, 5)
-			v.target.y = player.y + math.random(-5, 5)
+			v.target.x = player.x
+			v.target.y = player.y
 		elseif v.state == "moveToPlayer" then
 			local angleToPlayer = findAngle(v.x, v.y, player.x, player.y)
 
@@ -40,6 +40,9 @@ function enemies.ai(dt)
 		end
 
 		if v.canShoot == true then
+			v.target.x = v.target.x + math.random(-5, 5)
+			v.target.y = v.target.y + math.random(-5, 5)
+
 			addBullet(v.x, v.y, v.target.x, v.target.y, 0, 0, "enemy")
 
 			v.xvel = v.xvel - (math.cos(findAngle(v.x, v.y, v.target.x, v.target.y)) * shotForce) * v.m
